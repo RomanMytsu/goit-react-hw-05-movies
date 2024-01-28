@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import SearchForm from 'components/SearchForm/SearchForm';
 import { useSearchParams } from 'react-router-dom';
-import { getMovieSearch } from 'components/Api/Api';
+
 import MovieList from 'components/MoviesList/MoviesList';
 import toast from 'react-hot-toast';
+import { getMovieSearch } from 'Api/Api';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);

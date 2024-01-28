@@ -1,6 +1,9 @@
-import { getCastId } from 'components/Api/Api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
+import { getCastId } from 'Api/Api';
+import { Loader } from 'components/Loader/Loader';
 import {
   ImgCast,
   ImgWrap,
@@ -9,8 +12,7 @@ import {
   List,
   NameCast,
 } from './Cast.styled';
-import { Loader } from 'components/Loader/Loader';
-import toast from 'react-hot-toast';
+import defaultImgCast from '../Image/default-cast.jpg';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -36,6 +38,11 @@ const Cast = () => {
 
   return (
     <div>
+      {cast.length === 0 && (
+        <p style={{ textAlign: 'center', paddingTop: '20px' }}>
+          We don't have any cast for this movie
+        </p>
+      )}
       {loading && <Loader />}
       {error && !loading && toast.error('Cast not found.')}
       {cast && (
@@ -44,7 +51,11 @@ const Cast = () => {
             <Item key={id}>
               <ImgWrap>
                 <ImgCast
-                  src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+                  src={
+                    profile_path
+                      ? `https://image.tmdb.org/t/p/w300${profile_path}`
+                      : defaultImgCast
+                  }
                   alt={name}
                 />
               </ImgWrap>

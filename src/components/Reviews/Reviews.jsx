@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
-import { getReviewsId } from 'components/Api/Api';
 import { Loader } from 'components/Loader/Loader';
+import { getReviewsId } from 'Api/Api';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -29,6 +29,11 @@ const Reviews = () => {
 
   return (
     <ul>
+      {reviews.length === 0 && (
+        <p style={{ textAlign: 'center', paddingTop: '20px' }}>
+          We don't have any reviews for this movie
+        </p>
+      )}
       {loading && <Loader />}
       {error && !loading && toast.error('Reviews not found.')}
       {reviews.map(({ author, content, id }) => (

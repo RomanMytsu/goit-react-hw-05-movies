@@ -7,10 +7,11 @@ import {
 } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-import { getMovieId } from './../components/Api/Api';
+
 import MovieInfo from 'components/MovieInfo/MovieInfo';
 import { Loader } from 'components/Loader/Loader';
 import { LinkStyled } from 'components/Header/Header.styled';
+import { getMovieId } from 'Api/Api';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
