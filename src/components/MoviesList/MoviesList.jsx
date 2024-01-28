@@ -1,23 +1,25 @@
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Item, List, MovieLink, MovieTitle } from './MoviesList.styled';
 
 const MovieList = ({ movies }) => {
+  const location = useLocation();
   return (
     <>
-      <ul>
-        {movies.map(({ id, original_title, poster_path }) => {
+      <List>
+        {movies.map(({ id, title, poster_path }) => {
           return (
-            <li key={id}>
-              <Link to={`/movies/${id}`}>
+            <Item key={id}>
+              <MovieLink to={`/movies/${id}`} state={{ from: location }}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                  alt={original_title}
+                  alt={title}
                 />
-                <p>{original_title}</p>
-              </Link>
-            </li>
+                <MovieTitle>{title}</MovieTitle>
+              </MovieLink>
+            </Item>
           );
         })}
-      </ul>
+      </List>
     </>
   );
 };

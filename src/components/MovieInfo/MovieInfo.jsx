@@ -1,27 +1,30 @@
+import { Info, Span, Wrap } from './MovieInfo.styled';
+
 const MovieInfo = ({
-  movie: {
-    genres,
-    original_title,
-    overview,
-    poster_path,
-    runtime,
-    vote_average,
-  },
+  movie: { genres, title, overview, poster_path, runtime, vote_average },
 }) => {
-  const posterUrl = `https://image.tmdb.org/t/p/w300${poster_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
   const elements = genres.map(({ id, name }) => <span key={id}>{name}</span>);
 
   return (
-    <>
-      <div>
-        <h2>{original_title}</h2>
-        <img src={posterUrl} alt={original_title} />
-        <p>User score: {vote_average}</p>
-        <span>{runtime} minutes</span>
-        <p>{overview}</p>
-        <p>{elements}</p>
-      </div>
-    </>
+    <Wrap>
+      <img src={posterUrl} alt={title} />
+      <Info>
+        <h2>{title}</h2>
+        <p>
+          <Span>User score: {vote_average}</Span>
+        </p>
+        <p>
+          <Span> Duration: {runtime} minutes</Span>
+        </p>
+        <p>
+          <Span>{overview}</Span>
+        </p>
+        <p>
+          <Span>Genres: {elements}</Span>
+        </p>
+      </Info>
+    </Wrap>
   );
 };
 
